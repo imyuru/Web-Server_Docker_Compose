@@ -1,116 +1,116 @@
-1.	version: '2'
-2.	 
-3.	services:
-4.	    nginx-proxy:
-5.	        image: jwilder/nginx-proxy
-6.	 
-7.	        ports:
-8.	         - "80:80"
-9.	         - "443:443"
-10.	        volumes:
-11.	          - /var/run/docker.sock:/tmp/docker.sock:ro
-12.	          - ./certs:/etc/nginx/certs:ro
-13.	          - ./vhostd:/etc/nginx/vhost.d
-14.	          - ./html:/usr/share/nginx/html
-15.	        labels:
-16.	          - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
-17.	    letsencrypt:
-18.	#        image: jrcs/letsencrypt-nginx-proxy-companion
-19.	        image: jrcs/letsencrypt-nginx-proxy-companion:v1.13
-20.	        restart: always
-21.	        environment:
-22.	        - NGINX_PROXY_CONTAINER=nginx-proxy
-23.	#        - DEFAULT_EMAIL=eduardo.samaniego1@utp.ac.pa
-24.	        volumes:
-25.	          - ./certs:/etc/nginx/certs:rw
-26.	          - ./vhostd:/etc/nginx/vhost.d
-27.	          - ./html:/usr/share/nginx/html
-28.	          - /var/run/docker.sock:/var/run/docker.sock:ro
-29.	    wordpress:
-30.	        image: wordpress
-31.	        container_name: wordpress_1
-32.	        links:
-33.	         - mariadb:mysql
-34.	         - redis
-35.	        expose:
-36.	         - 80
-37.	        environment:
-38.	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
-39.	         - WORDPRESS_DB_USER=userwp
-40.	         - WORDPRESS_DB_NAME=wpdb
-41.	         - WP_REDIS_HOST="redis"
-42.	         - "VIRTUAL_HOST=prueba.local"
-43.	         - "LETSENCRYPT_HOST=prueba.local"
-44.	         - "LETSENCRYPT_EMAIL=eduardo.samaniego1@utp.ac.pa"
-45.	        volumes:
-46.	         - ./html:/var/www/html
-47.	    wordpress2:
-48.	        image: wordpress
-49.	        container_name: wordpress_2
-50.	        links:
-51.	         - mariadb:mysql
-52.	         - redis
-53.	        expose:
-54.	         - 80
-55.	        environment:
-56.	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
-57.	         - WORDPRESS_DB_USER=userwp
-58.	         - WORDPRESS_DB_NAME=wpdb
-59.	         - WP_REDIS_HOST="redis"
-60.	         - "VIRTUAL_HOST=prueba.local"
-61.	         - "LETSENCRYPT_HOST=prueba.local"
-62.	         - "LETSENCRYPT_EMAIL=eduardo.samaniego1@utp.ac.pa"
-63.	        volumes:
-64.	         - ./html:/var/www/html
-65.	    wordpress3:
-66.	        image: wordpress
-67.	        container_name: wordpress_3
-68.	        links:
-69.	         - mariadb:mysql
-70.	         - redis
-71.	        expose:
-72.	         - 80
-73.	        environment:
-74.	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
-75.	         - WORDPRESS_DB_USER=userwp
-76.	         - WORDPRESS_DB_NAME=wpdb
-77.	         - WP_REDIS_HOST="redis"
-78.	         - "VIRTUAL_HOST=prueba.local"
-79.	         - "LETSENCRYPT_HOST=prueba.local"
-80.	         - "LETSENCRYPT_EMAIL=eduardo.samaniego1@utp.ac.pa"
-81.	        volumes:
-82.	         - ./html:/var/www/html
-83.	    wordpress4:
-84.	        image: wordpress
-85.	        container_name: wordpress_4
-86.	        links:
-87.	         - mariadb:mysql
-88.	         - redis
-89.	        expose:
-90.	         - 80
-91.	        environment:
-92.	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
-93.	         - WORDPRESS_DB_USER=userwp
-94.	         - WORDPRESS_DB_NAME=wpdb
-95.	         - WP_REDIS_HOST="redis"
-96.	         - "VIRTUAL_HOST=prueba.local"
-97.	         - "LETSENCRYPT_HOST=prueba.local"
-98.	         - "LETSENCRYPT_EMAIL=eduardo.samaniego1@utp.ac.pa"
-99.	        volumes:
-100.	         - ./html:/var/www/html
-101.	    mariadb:
-102.	        image: mariadb
-103.	 
-104.	        environment:
-105.	         - MYSQL_ROOT_PASSWORD=qwerty123456789
-106.	         - MYSQL_DATABASE=wpdb
-107.	         - MYSQL_USER=userwp
-108.	         - MYSQL_PASSWORD=qwertyqwerty
-109.	        volumes:
-110.	         - ./database:/var/lib/mysql
-111.	    redis:
-112.	        image: 'bitnami/redis:latest'
-113.	        environment:
-114.	         - ALLOW_EMPTY_PASSWORD=yes
-115.	   
+	version: '2'
+ 
+	services:
+	    nginx-proxy:
+	        image: jwilder/nginx-proxy
+	 
+	        ports:
+	         - "80:80"
+	         - "443:443"
+	        volumes:
+	          - /var/run/docker.sock:/tmp/docker.sock:ro
+	          - ./certs:/etc/nginx/certs:ro
+	          - ./vhostd:/etc/nginx/vhost.d
+	          - ./html:/usr/share/nginx/html
+	        labels:
+	          - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+	    letsencrypt:
+	#        image: jrcs/letsencrypt-nginx-proxy-companion
+	        image: jrcs/letsencrypt-nginx-proxy-companion:v1.13
+	        restart: always
+	        environment:
+	        - NGINX_PROXY_CONTAINER=nginx-proxy
+	#        - DEFAULT_EMAIL=example@gmail.com
+	        volumes:
+	          - ./certs:/etc/nginx/certs:rw
+	          - ./vhostd:/etc/nginx/vhost.d
+	          - ./html:/usr/share/nginx/html
+	          - /var/run/docker.sock:/var/run/docker.sock:ro
+	    wordpress:
+	        image: wordpress
+	        container_name: wordpress_1
+	        links:
+	         - mariadb:mysql
+	         - redis
+	        expose:
+	         - 80
+	        environment:
+	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
+	         - WORDPRESS_DB_USER=userwp
+	         - WORDPRESS_DB_NAME=wpdb
+	         - WP_REDIS_HOST="redis"
+	         - "VIRTUAL_HOST=prueba.local"
+	         - "LETSENCRYPT_HOST=prueba.local"
+	         - "LETSENCRYPT_EMAIL=example@gmail.com"
+	        volumes:
+	         - ./html:/var/www/html
+	    wordpress2:
+	        image: wordpress
+	        container_name: wordpress_2
+	        links:
+	         - mariadb:mysql
+	         - redis
+	        expose:
+	         - 80
+	        environment:
+	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
+	         - WORDPRESS_DB_USER=userwp
+	         - WORDPRESS_DB_NAME=wpdb
+	         - WP_REDIS_HOST="redis"
+	         - "VIRTUAL_HOST=prueba.local"
+	         - "LETSENCRYPT_HOST=prueba.local"
+	         - "LETSENCRYPT_EMAIL=example@gmail.com"
+        volumes:
+	         - ./html:/var/www/html
+	    wordpress3:
+	        image: wordpress
+	        container_name: wordpress_3
+	        links:
+	         - mariadb:mysql
+	         - redis
+	        expose:
+	         - 80
+	        environment:
+	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
+	         - WORDPRESS_DB_USER=userwp
+	         - WORDPRESS_DB_NAME=wpdb
+	         - WP_REDIS_HOST="redis"
+	         - "VIRTUAL_HOST=prueba.local"
+	         - "LETSENCRYPT_HOST=prueba.local"
+	         - "LETSENCRYPT_EMAIL=example@gmail.com"
+	        volumes:
+	         - ./html:/var/www/html
+	    wordpress4:
+	        image: wordpress
+	        container_name: wordpress_4
+	        links:
+	         - mariadb:mysql
+	         - redis
+	        expose:
+	         - 80
+	        environment:
+	         - WORDPRESS_DB_PASSWORD=qwertyqwerty
+         - WORDPRESS_DB_USER=userwp
+	         - WORDPRESS_DB_NAME=wpdb
+	         - WP_REDIS_HOST="redis"
+	         - "VIRTUAL_HOST=prueba.local"
+	         - "LETSENCRYPT_HOST=prueba.local"
+	         - "LETSENCRYPT_EMAIL=example@gmail.com"
+	        volumes:
+	         - ./html:/var/www/html
+	    mariadb:
+	        image: mariadb
+	 
+	        environment:
+	         - MYSQL_ROOT_PASSWORD=qwerty123456789
+	         - MYSQL_DATABASE=wpdb
+	         - MYSQL_USER=userwp
+	         - MYSQL_PASSWORD=qwertyqwerty
+	        volumes:
+	         - ./database:/var/lib/mysql
+	    redis:
+	        image: 'bitnami/redis:latest'
+	        environment:
+	         - ALLOW_EMPTY_PASSWORD=yes
+	   
 
